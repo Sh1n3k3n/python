@@ -6,7 +6,7 @@
  @File:      login.py
  @Date:      2018/1/10 13:30
  @Version:   1.0
- @Function:  
+ @Function:  模拟用户登录，3次密码错误后锁定
  @Useage:    
  -------------------------------
  @Update log:
@@ -15,14 +15,12 @@
 '''
 
 import os
+work_path = os.path.split(os.path.realpath(__file__))[0]
 
-#读取文件，r''表示无视转义，’r‘表示读取
-with open(r'E:\WORK\事务\Python-学习\python35\python\day1\block.txt','r') as f:
-    # .strip("str")移除收尾str字符串，这里表示移除空格
-    # list表示列表 格式为 [a,b,1,...]
+with open(work_path+r'\block.txt','r') as f:
     list_block = list(line.strip() for line in f )
 
-with open(r'E:\WORK\事务\Python-学习\python35\python\day1\user.txt','r') as f:
+with open(work_path+r'\user.txt','r') as f:
     dict_user = dict(line.strip().split(':') for line in f )
 
 name = input("Please input username: ")
@@ -42,5 +40,5 @@ else:
             count -=1
     else:
         print("User name [ {_name} ] have been blocked!".format(_name=name))
-        with open(r'E:\WORK\事务\Python-学习\python35\python\day1\block.txt', 'a') as f:
+        with open(work_path+r'\block.txt', 'a') as f:
             f.write(name + '\n')
