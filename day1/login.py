@@ -16,7 +16,7 @@
 
 import os
 work_path = os.path.split(os.path.realpath(__file__))[0]
-
+#print(work_path)
 with open(work_path+r'\block.txt','r') as f:
     list_block = list(line.strip() for line in f )
 
@@ -25,20 +25,21 @@ with open(work_path+r'\user.txt','r') as f:
 
 name = input("Please input username: ")
 if name in list_block:
-    print("User {_name} has been blocked!".format(_name=name))
+    print(f"User {name} has been blocked!")
 elif name not in dict_user:
-    print("User {_name} is not existed!".format(_name=name))
+    print(f"User {name} is not existed!")
 else:
     count = 3
     while count >0:
-        print("User {_name} you have {_count} times to login!".format(_name=name,_count=count))
+        print(f"User {name} you have {count} times to login!")
         passwd = input("Input your password: ")
         if  dict_user[name] == passwd:
-            print("Welcome {_name} !".format(_name=name))
+            #print("Welcome {_name} !".format(_name=name))
+            print(f"Welcome {name} !")
             break
         else:
             count -=1
     else:
-        print("User name [ {_name} ] have been blocked!".format(_name=name))
+        print(f"User name [ {name} ] have been blocked!")
         with open(work_path+r'\block.txt', 'a') as f:
             f.write(name + '\n')
