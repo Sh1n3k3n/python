@@ -11,35 +11,37 @@
  -------------------------------
  @Update log:
  
+ change work_path "\ to "/"
+ change print f'' to '%s' ways
  -------------------------------
 '''
 
 import os
 work_path = os.path.split(os.path.realpath(__file__))[0]
-#print(work_path)
-with open(work_path+r'\block.txt','r') as f:
-    list_block = list(line.strip() for line in f )
 
-with open(work_path+r'\user.txt','r') as f:
-    dict_user = dict(line.strip().split(':') for line in f )
+with open(work_path + r'/block.txt', 'r') as f:
+    list_block = list(line.strip() for line in f)
+
+with open(work_path + r'/user.txt', 'r') as f:
+    dict_user = dict(line.strip().split(':') for line in f)
 
 name = input("Please input username: ")
 if name in list_block:
-    print(f"User {name} has been blocked!")
+    print("User %s has been blocked!" % name)
 elif name not in dict_user:
-    print(f"User {name} is not existed!")
+    print("User %s is not existed!" % name)
 else:
     count = 3
-    while count >0:
-        print(f"User {name} you have {count} times to login!")
+    while count > 0:
+        print("User %s you have %d times to login!" % (name, count))
         passwd = input("Input your password: ")
-        if  dict_user[name] == passwd:
+        if dict_user[name] == passwd:
             #print("Welcome {_name} !".format(_name=name))
-            print(f"Welcome {name} !")
+            print("Welcome %s !" % name)
             break
         else:
-            count -=1
+            count -= 1
     else:
-        print(f"User name [ {name} ] have been blocked!")
-        with open(work_path+r'\block.txt', 'a') as f:
+        print('User name [ %s ] have been blocked!' % name)
+        with open(work_path + r'/block.txt', 'a') as f:
             f.write(name + '\n')
